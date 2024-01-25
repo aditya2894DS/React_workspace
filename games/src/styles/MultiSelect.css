@@ -1,0 +1,16 @@
+.square-container {
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+}
+
+.square {
+  height: 1in;
+  width: 1in;
+  background-color: blueviolet;
+  cursor: pointer;
+}
+
+.active{
+    background-color: orange;
+}
