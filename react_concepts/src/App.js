@@ -1,3 +1,4 @@
+
 import './App.css';
 import StrictMode from './components/StrictMode';
 import UpdatingState from './components/UpdatingState';
@@ -7,6 +8,7 @@ function App() {
     <div className="App">
       <StrictMode />
       <UpdatingState />
+
     </div>
   );
 }
