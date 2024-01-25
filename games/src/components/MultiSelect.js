@@ -16,8 +16,6 @@ function Square({ data, getClickedId, clickedArrState }) {
   }, [clickedArrState]);
 
   useEffect(() => {
-    // console.log("sq", clickArrState);
-    // console.log(myRef.current);
     if (clickArrState.includes(myRef.current.toString())) {
       setHighlight(true);
     } else {
@@ -70,7 +68,6 @@ export default function MultiSelect() {
           // console.log(temp);
         }
       }
-      // console.log(clickedArr)
     }, [clickedArr]);
 
   return (
