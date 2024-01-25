@@ -29,6 +29,7 @@ function Square({ data, getClickedId, clickedArrState }) {
         className={`square ${highlight ? "active" : " "}`}
         id={data}
         onClick={handleClick}
+        
       ></div>
     </>
   );
