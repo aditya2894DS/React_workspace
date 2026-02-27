@@ -1,0 +1,53 @@
+/* Global */
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}
+
+/* Calendar container */
+.calendar-container {
+  width: 500px;
+}
+#calendar-header {
+  background-color: cornflowerblue;
+  padding: 0 5px;
+}
+.calendar-grid {
+  border: 2px solid red;
+  display: grid;
+}
+
+/* Calender header */
+.iconHolder {
+  width: 20px;
+  height: 20px;
+  /* border: 2px solid red; */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+#go-backward {
+  background-image: url("../assets/icons/left-arrow.svg");
+}
+
+#go-forward {
+  background-image: url("../assets/icons/left-arrow.svg");
+  transform: scaleX(-1);
+}
+
+/* Day card */
+
+/* Task Container card */

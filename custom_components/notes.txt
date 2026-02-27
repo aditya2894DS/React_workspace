@@ -1,3 +1,0 @@
-1. Accordian
-2. Image Carousel
-3. Pagination
