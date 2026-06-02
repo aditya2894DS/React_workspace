@@ -19,21 +19,38 @@
 /* Calendar container */
 .calendar-container {
   width: 500px;
+  margin-top: 1em;
 }
 #calendar-header {
   background-color: cornflowerblue;
   padding: 0 5px;
 }
 .calendar-grid {
-  border: 2px solid red;
-  display: grid;
+  /* border: 2px solid red; */
+  display: flex;
+  overflow: hidden;
+  margin-top: 5px;
+}
+.calendar-grid .month-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-grid .month-container .week-row {
+  margin-bottom: 5px;
+}
+
+.calendar-grid .month-container .week-row .days-container {
+  display: flex;
+  width: 500px;
+  gap: 2px;
+  margin-bottom: 2px;
 }
 
 /* Calender header */
 .iconHolder {
   width: 20px;
   height: 20px;
-  /* border: 2px solid red; */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -49,5 +66,48 @@
 }
 
 /* Day card */
+#day-card-container {
+  background-color: darkgrey;
+  align-items: center;
+  height: 70px;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 2px;
+  display: flex;
+  width: 70px;
+}
+#day-card-container.no-side-margin {
+  margin: 10px 0;
+}
+
+#day-card-container > p {
+  margin: 0;
+}
+#day-card-container .dayName {
+  font-size: 0.7em;
+  font-weight: bold;
+}
+
+#day-card-container .dayNumber {
+  /* font-weight: bold; */
+  font-size: 1.2em;
+}
 
 /* Task Container card */
+.task-container.open {
+  border-radius: 5px;
+  background-color: darksalmon;
+  max-height: 50px;
+  padding: 5px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.task-container.closed {
+  max-height: 5px;
+}
+
+.task-container .task-text {
+  margin: 0;
+  font-size: 0.8em;
+}

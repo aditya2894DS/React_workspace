@@ -1,9 +1,17 @@
 import CalendarHeader from "../components/Calendar/CalendarHeader";
+import DayCard from "../components/Calendar/DayCard";
 import "../styles/Calendar.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
+import { CalendarContext } from "../contexts/CalendarContext";
+import TaskContainerCard from "../components/Calendar/TaskContainerCard";
+
+function WeekRow({ children }) {
+  return <div className="week-row">{children}</div>;
+}
 
 function Calendar() {
-  const generatedDatesArrRef = useRef([]);
+  const [generatedDatesArrState, setGeneratedDatesArrState] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(0);
 
   const monthsMapped = [
     { id: 1, name: "January" },
@@ -20,16 +28,6 @@ function Calendar() {
     { id: 12, name: "December" },
   ];
 
-  const daysMapped = [
-    { id: 1, name: "Sunday" },
-    { id: 2, name: "Monday" },
-    { id: 3, name: "Tuesday" },
-    { id: 4, name: "Wednesday" },
-    { id: 5, name: "Thursday" },
-    { id: 6, name: "Friday" },
-    { id: 7, name: "Saturday" },
-  ];
-
   function getMonthName(id) {
     let monthObj = monthsMapped.filter((month) => month.id === id);
     return monthObj[0].name;
@@ -43,59 +41,49 @@ function Calendar() {
         case 1: {
           dateObj.day = i;
           dateObj.month = getMonthName(monthId);
-          dateObj.dayName = "Sunday";
+          dateObj.dayName = "Sun";
           generatedDatesArr.push(dateObj);
           break;
         }
         case 2: {
-          //   var dateObj = { day: "", month: "", dayName: "" };
           dateObj.day = i;
           dateObj.month = getMonthName(monthId);
-          dateObj.dayName = "Monday";
+          dateObj.dayName = "Mon";
           generatedDatesArr.push(dateObj);
           break;
         }
         case 3: {
-          //   var dateObj = { day: "", month: "", dayName: "" };
           dateObj.day = i;
           dateObj.month = getMonthName(monthId);
-          dateObj.dayName = "Tuesday";
+          dateObj.dayName = "Tue";
           generatedDatesArr.push(dateObj);
           break;
         }
         case 4: {
-          //   var dateObj = { day: "", month: "", dayName: "" };
           dateObj.day = i;
           dateObj.month = getMonthName(monthId);
-          dateObj.dayName = "Wednesday";
-          //   generatedDatesArr.push(dateObj)
+          dateObj.dayName = "Wed";
           generatedDatesArr.push(dateObj);
           break;
         }
         case 5: {
-          //   var dateObj = { day: "", month: "", dayName: "" };
           dateObj.day = i;
           dateObj.month = getMonthName(monthId);
-          dateObj.dayName = "Thursday";
-          //   generatedDatesArr.push(dateObj);
+          dateObj.dayName = "Thu";
           generatedDatesArr.push(dateObj);
           break;
         }
         case 6: {
-          //   var dateObj = { day: "", month: "", dayName: "" };
           dateObj.day = i;
           dateObj.month = getMonthName(monthId);
-          dateObj.dayName = "Friday";
-          //   generatedDatesArr.push(dateObj);
+          dateObj.dayName = "Fri";
           generatedDatesArr.push(dateObj);
           break;
         }
         case 0: {
-          //   var dateObj = { day: "", month: "", dayName: "" };
           dateObj.day = i;
           dateObj.month = getMonthName(monthId);
-          dateObj.dayName = "Saturday";
-          //   generatedDatesArr.push(dateObj);
+          dateObj.dayName = "Sat";
           generatedDatesArr.push(dateObj);
           break;
         }
@@ -104,36 +92,95 @@ function Calendar() {
         }
       }
     }
-
-    generatedDatesArrRef.current.push(generatedDatesArr);
-    return generatedDatesArrRef;
+    return generatedDatesArr;
   }
 
   function generateDates() {
+    var allDates = [];
     for (var i = 1; i < monthsMapped.length + 1; i++) {
       if ([1, 3, 5, 7, 8, 10, 12].includes(i)) {
-        incrementDays(31, i);
+        let result = incrementDays(31, i);
+        allDates.push(result);
       } else if ([4, 6, 9, 11].includes(i)) {
-        incrementDays(30, i);
+        let result = incrementDays(30, i);
+        allDates.push(result);
       } else {
-        incrementDays(28, i);
+        let result = incrementDays(28, i);
+        allDates.push(result);
       }
+    }
+    return allDates;
+  }
+
+  function handleDayNumber(dayNo) {
+    let multiple = dayNo / 7;
+    if (multiple <= 1) {
+      setSelectedDate(1);
+    } else if (multiple <= 2) {
+      setSelectedDate(2);
+    } else if (multiple <= 3) {
+      setSelectedDate(3);
+    } else if (multiple <= 4) {
+      setSelectedDate(4);
+    } else if (multiple <= 5) {
+      setSelectedDate(5);
     }
   }
 
+  function generateWeekRows(arr) {
+    var weeklyArr = [];
+    var newWeekArr = [];
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].day % 7 === 1) {
+        newWeekArr = [];
+        newWeekArr.push(arr[i]);
+        weeklyArr.push(newWeekArr);
+        continue;
+      } else {
+        newWeekArr.push(arr[i]);
+      }
+    }
+    return weeklyArr.map((week, index) => (
+      <WeekRow>
+        <div className="days-container">
+          {week.map((day) => (
+            <DayCard
+              dayName={day.dayName}
+              dayNumber={day.day}
+              getDayNumber={handleDayNumber}
+            />
+          ))}
+        </div>
+        <TaskContainerCard weekNo={index} selectedDate={selectedDate} />
+      </WeekRow>
+    ));
+  }
+
   useEffect(() => {
-    generatedDatesArrRef.current = []; // reset
-    generateDates();
-    console.log(generatedDatesArrRef.current);
-    // console.log(dates);
+    var generatedDates = generateDates();
+    setGeneratedDatesArrState(generatedDates);
   }, []);
 
   return (
     <>
-      <div className="container flex-column calendar-container">
-        <CalendarHeader monthName="January" yearNumber={2026} />
-        <div className="calendar-grid"></div>
-      </div>
+      <CalendarContext value={{ day: selectedDate }}>
+        <div className="container flex-column calendar-container">
+          <CalendarHeader monthName="January" yearNumber={2026} />
+          <div className="calendar-grid">
+            {generatedDatesArrState.length === 0 ? (
+              <p>No dates generated</p>
+            ) : (
+              generatedDatesArrState.map((dateObjArr) => {
+                return (
+                  <div className="month-container">
+                    {generateWeekRows(dateObjArr)}
+                  </div>
+                );
+              })
+            )}
+          </div>
+        </div>
+      </CalendarContext>
     </>
   );
 }

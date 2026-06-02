@@ -1,0 +1,24 @@
+/* Calendar container */
+.calendar-container {
+  width: max-content;
+  border: 1px solid black;
+}
+
+/* Calendar topbar */
+.calendar-topbar {
+  display: flex;
+  align-items: center;
+}
+.date-field-container {
+  display: flex;
+}
+.date-field-container > label {
+  margin: 0 5px;
+}
+
+/* Calendar grid */
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
