@@ -8,6 +8,7 @@
 .calendar-topbar {
   display: flex;
   align-items: center;
+  margin: 5px 0;
 }
 .date-field-container {
   display: flex;
