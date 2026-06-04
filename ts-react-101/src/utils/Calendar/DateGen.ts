@@ -28,7 +28,7 @@ export function DateGen() {
     while (i <= 31) {
       // function for week
       const dateObj = getDate(i);
-      dateObj.month = "January";
+      dateObj.month = "january";
       dateObj.dayNo = i;
       monthArr.push(dateObj);
       // console.log(dateObj);
@@ -38,7 +38,7 @@ export function DateGen() {
     while (i > 31 && i <= 59) {
       // function for week
       const dateObj = getDate(i);
-      dateObj.month = "February";
+      dateObj.month = "february";
       dateObj.dayNo = i - 31;
       monthArr.push(dateObj);
       // console.log(dateObj);
@@ -48,7 +48,7 @@ export function DateGen() {
     while (i > 59 && i <= 90) {
       // function for week
       const dateObj = getDate(i);
-      dateObj.month = "March";
+      dateObj.month = "march";
       dateObj.dayNo = i - 59;
       monthArr.push(dateObj);
       // console.log(dateObj);
@@ -58,7 +58,7 @@ export function DateGen() {
     while (i > 90 && i <= 120) {
       // function for week
       const dateObj = getDate(i);
-      dateObj.month = "April";
+      dateObj.month = "april";
       dateObj.dayNo = i - 90;
       monthArr.push(dateObj);
       // console.log(dateObj);
@@ -68,7 +68,7 @@ export function DateGen() {
     while (i > 120 && i <= 151) {
       // function for week
       const dateObj = getDate(i);
-      dateObj.month = "May";
+      dateObj.month = "may";
       dateObj.dayNo = i - 120;
       monthArr.push(dateObj);
       // console.log(dateObj);
@@ -78,7 +78,7 @@ export function DateGen() {
     while (i > 151 && i <= 181) {
       // function for week
       const dateObj = getDate(i);
-      dateObj.month = "June";
+      dateObj.month = "june";
       dateObj.dayNo = i - 151;
       monthArr.push(dateObj);
       // console.log(dateObj);
@@ -88,7 +88,7 @@ export function DateGen() {
     while (i > 181 && i <= 212) {
       // function for week
       const dateObj = getDate(i);
-      dateObj.month = "July";
+      dateObj.month = "july";
       dateObj.dayNo = i - 181;
       monthArr.push(dateObj);
       // console.log(dateObj);
@@ -98,7 +98,7 @@ export function DateGen() {
     while (i > 212 && i <= 243) {
       // function for week
       const dateObj = getDate(i);
-      dateObj.month = "August";
+      dateObj.month = "august";
       dateObj.dayNo = i - 212;
       monthArr.push(dateObj);
       // console.log(dateObj);
@@ -108,7 +108,7 @@ export function DateGen() {
     while (i > 243 && i <= 273) {
       // function for week
       const dateObj = getDate(i);
-      dateObj.month = "September";
+      dateObj.month = "september";
       dateObj.dayNo = i - 243;
       monthArr.push(dateObj);
       // console.log(dateObj);
@@ -118,7 +118,7 @@ export function DateGen() {
     while (i > 273 && i <= 304) {
       // function for week
       const dateObj = getDate(i);
-      dateObj.month = "October";
+      dateObj.month = "october";
       dateObj.dayNo = i - 273;
       monthArr.push(dateObj);
       // console.log(dateObj);
@@ -128,7 +128,7 @@ export function DateGen() {
     while (i > 304 && i <= 334) {
       // function for week
       const dateObj = getDate(i);
-      dateObj.month = "November";
+      dateObj.month = "november";
       dateObj.dayNo = i - 304;
       monthArr.push(dateObj);
       // console.log(dateObj);
@@ -138,7 +138,7 @@ export function DateGen() {
     while (i > 334 && i <= 365) {
       // function for week
       const dateObj = getDate(i);
-      dateObj.month = "December";
+      dateObj.month = "december";
       dateObj.dayNo = i - 334;
       monthArr.push(dateObj);
       // console.log(dateObj);
@@ -147,4 +147,5 @@ export function DateGen() {
     }
   }
   // console.log(dates);
+  return dates;
 }
