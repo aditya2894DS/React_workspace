@@ -22,6 +22,7 @@ function getDate(startDayNo: number) {
 }
 
 export function DateGen() {
+  console.log("running dategen");
   const dates = [];
   for (let i = 1; i < 366; i++) {
     const monthArr = [];

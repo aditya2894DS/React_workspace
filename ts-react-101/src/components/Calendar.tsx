@@ -1,6 +1,16 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useMemo } from "react";
 import "../styles/Calendar.css";
 import { DateGen } from "../utils/Calendar/DateGen";
+
+const dayObjects = [
+  { short: "Mon", dayName: "Monday" },
+  { short: "Tue", dayName: "Tuesday" },
+  { short: "Wed", dayName: "Wednesday" },
+  { short: "Thur", dayName: "Thursday" },
+  { short: "Fri", dayName: "Friday" },
+  { short: "Saturday", dayName: "Saturday" },
+  { short: "Sun", dayName: "Sunday" },
+];
 
 interface SelectedDate {
   month: string;
@@ -40,7 +50,6 @@ function CalendarTopbar() {
       </div>
       <div className="date-field-container">
         <label htmlFor="months">Month:</label>
-        {/* <input type="text" placeholder="month" /> */}
         <select
           name="months"
           id="months"
@@ -77,7 +86,7 @@ function DayFilterCol({
   dayName,
   short,
 }: {
-  filteredDates: [CalendarDate];
+  filteredDates: CalendarDate[];
   dayName: string;
   short: string;
 }) {
@@ -92,7 +101,7 @@ function DayFilterCol({
   );
 }
 
-function CalendarGrid({ dates }: { dates: [CalendarDate] }) {
+function CalendarGrid({ dates }: { dates: CalendarDate[] }) {
   const { selectedDate } = useContext(SelectedDateContext);
 
   const filteredDates = (function filterDateAsPerSelectedMonth() {
@@ -104,45 +113,14 @@ function CalendarGrid({ dates }: { dates: [CalendarDate] }) {
 
   return (
     <div className="calendar-grid">
-      {filteredDates && (
-        <>
+      {filteredDates &&
+        dayObjects.map((dayObj) => (
           <DayFilterCol
             filteredDates={filteredDates}
-            dayName="Monday"
-            short="Mon"
+            dayName={dayObj.dayName}
+            short={dayObj.short}
           />
-          <DayFilterCol
-            filteredDates={filteredDates}
-            dayName="Tuesday"
-            short="Tue"
-          />
-          <DayFilterCol
-            filteredDates={filteredDates}
-            dayName="Wednesday"
-            short="Wed"
-          />
-          <DayFilterCol
-            filteredDates={filteredDates}
-            dayName="Thursday"
-            short="Thu"
-          />
-          <DayFilterCol
-            filteredDates={filteredDates}
-            dayName="Friday"
-            short="Fri"
-          />
-          <DayFilterCol
-            filteredDates={filteredDates}
-            dayName="Saturday"
-            short="Sat"
-          />
-          <DayFilterCol
-            filteredDates={filteredDates}
-            dayName="Sunday"
-            short="Sun"
-          />
-        </>
-      )}
+        ))}
     </div>
   );
 }
@@ -173,7 +151,7 @@ export default function Calendar() {
 
   const value = { selectedDate, setSelectedDate };
 
-  const allDates = DateGen();
+  const allDates = useMemo(() => DateGen(), []);
 
   return (
     <SelectedDateContext.Provider value={value}>
